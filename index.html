@@ -47,7 +47,37 @@
             </div>
         </div>
     </div>
+<script>
+    let selectedSeats = [];
 
-    <script src="script.js"></script>
+    function nextStep(step) {
+        document.querySelectorAll('.step').forEach(stepDiv => stepDiv.classList.add('hidden'));
+        document.getElementById('step' + step).classList.remove('hidden');
+        
+        if (step === 3) {
+            document.getElementById('ticketFrom').innerText = document.getElementById('from').value;
+            document.getElementById('ticketTo').innerText = document.getElementById('to').value;
+            document.getElementById('ticketSeats').innerText = selectedSeats.join(', ');
+        }
+    }
+
+    function selectSeat(seat) {
+        seat.classList.toggle('selected');
+        let seatNumber = seat.innerText;
+        
+        if (selectedSeats.includes(seatNumber)) {
+            selectedSeats = selectedSeats.filter(s => s !== seatNumber);
+        } else {
+            selectedSeats.push(seatNumber);
+        }
+    }
+
+    function printTicket() {
+        window.print();
+    }
+
+    document.getElementById('step1').classList.add('active');
+</script>
+
 </body>
 </html>
